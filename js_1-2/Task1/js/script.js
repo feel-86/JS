@@ -1,17 +1,16 @@
-﻿var a = prompt('Укажите число...');
+﻿var number = prompt('Укажите число...');
 
-var b = prompt('Укажите степень...');
+var exponent = prompt('Укажите степень...');
 
-function pow(a, b) {
+function pow(number, exponent) {
     
     var result = 1;
-    for(var i = 0; i < b; i++) {
-    result *= a 
-    
+    for(var i = 0; i < exponent; i++) {
+    result *= number 
     };
     
     console.log('pow = ', result);
     return result;
 };
 
-pow(a, b);
+pow(number, exponent);
