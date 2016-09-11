@@ -1,7 +1,7 @@
 ﻿ function pow(number, exponent) {
 
-	  number = Number(parseInt(number));
-	  exponent = Number(parseInt(exponent));
+	  number = Number(parseInt(number) ^ 0);
+	  exponent = Number(parseInt(exponent) ^ 0);
 
     var result = 1;
     for(var i = 0; i < exponent; i++) {
