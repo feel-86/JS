@@ -1,47 +1,44 @@
-var body = document.querySelector('body');
+function createTag(tagName, tagAttributes, tagText) {
+  
+  var element = document.createElement(tagName);
+  if (tagAttributes) {
+    for (key in tagAttributes) {
+      element.setAttribute(key, tagAttributes [key]);
+    }
+  }
+  if (tagText) {
+    var text = document.createTextNode(tagText)
+    element.appendChild(text);
+  }
+  return element;
+};
 
-var header = document.createElement('div');
-header.classList.add('header');
-
-var headerText = document.createElement('h1');
-headerText.innerHTML = 'Тест по программированию';
-header.appendChild(headerText);
-
-body.appendChild(header);
-
-var content = document.createElement('div');
-header.classList.add('content');
-
-var ol = document.createElement('ol');
-ol.classList.add('mainList');
+var parent = document.getElementsByTagName('body')[0];
+var div = createTag('div', {'class' : 'content'});
+var h1 = createTag('h1', '', 'Тест по программированию');
+var form = createTag('form', {'action' : 'index.html', 'method' : 'post', 'id' : 'myForm'});
+var submit = createTag('button', {'type' : 'submit', 'id' : 'check'}, 'Проверить мои результаты');
+var legend = []; 
+var label = []; 
+var input = [];
+var span = [];
 
 for (var i = 1; i <= 3; i++) {
-   var li = document.createElement('li');
-   li.innerHTML = 'Вопрос № ' + i;
-   ol.appendChild(li);
-   for (var j = 1; j <=3; j++) {
-   var label = document.createElement('label');
-   label.setAttribute('for', 'input' + j)
-   label.innerHTML = 'Вариант ответа № ' + j;
+  legend[i] = createTag('legend', '', [i] + '. Вопрос №' + [i]);
+  form.appendChild(legend[i]);
 
-   var checkBox = document.createElement('input');
-   checkBox.setAttribute('type', 'checkbox');
-   checkBox.setAttribute('id', 'input' + j);
-   checkBox.classList.add('checkbox-inline');
+  for (var k = 1; k <= 3; k++) {
+    label[k] = createTag('label');
+    input[k] = createTag('input', {'type' : 'checkbox', 'name' : 'answer', 'value' : 'variant' + [i] + [k]});
+    span[k] = createTag('span', '', 'Вариант ответа №' + [k]);
 
-   li.appendChild(checkBox);
-   li.appendChild(label);
+    form.appendChild(label[k]);
+    label[k].appendChild(input[k]);
+    label[k].appendChild(span[k]);
   }
-}
+};
 
-var button = document.createElement('button');
-button.classList.add('btn');
-button.classList.add('btn-primary');
-button.innerHTML = 'Проверить мои результаты';
-
-
-content.appendChild(ol);
-
-content.appendChild(button);
-
-body.appendChild(content);
+document.body.appendChild(div);
+div.appendChild(h1);
+div.appendChild(form);
+form.appendChild(submit);
